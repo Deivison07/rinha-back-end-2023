@@ -27,7 +27,7 @@ class MainTest(unittest.TestCase):
         }
         self.assertRaises(ValidationError, Pessoa, **v1)
     
-    def test_model_Pessoa_apelido_sem_nome(self):
+    def test_model_Pessoa_sem_nome(self):
         
         v1 = {
             "apelido" : 2,
