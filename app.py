@@ -1,21 +1,26 @@
 from uuid import UUID
 from flask import Flask, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
-from model.pessoa import Pessoa
-from settings import DATABASE_CONNECTION_URL
+from pydantic_core import ValidationError
+from settings import createData, db
 
-db = SQLAlchemy()
+# from model.pessoa import Pessoa
+from model.PessoaModel import Pessoa
 
 app = Flask(__name__)   #instancia Flask app
-app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_CONNECTION_URL
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db.init_app(app)
 
+createData(app)
 
 @app.route("/pessoas",methods=['POST'])
 def PostPessoas():
-    row = Pessoa(**request.json)
-    return {}
+    try:
+        new_user = Pessoa(**request.json)
+        db.session.add(new_user)
+        db.session.commit()
+    except ValidationError as e:
+        return {
+            'error': str(e)
+        }, 400
+    return '', 201
 
 @app.route("/pessoas/<uuid:id>",methods=['GET'])
 def GetPessoas(id): ...
@@ -30,4 +35,4 @@ def contagemPessas(): ...
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(debug=True)
