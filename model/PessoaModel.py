@@ -4,7 +4,7 @@ from sqlalchemy import DateTime
 
 from settings import db
 
-class Pessoa(db.Model):
+class PessoaM(db.Model):
     __tablename__ = 'pessoas'
     __table_args__ = {"schema": "public"}
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
