@@ -16,7 +16,8 @@ createData(app)
 def PostPessoas():
     try:
         new_user = Pessoa(**request.json)
-        db.session.add(PessoaM(**new_user.model_dump()))
+        row = PessoaM(**new_user.model_dump())
+        db.session.add(row)
         db.session.commit()
     except ValidationError as e:
         return {
@@ -27,7 +28,10 @@ def PostPessoas():
             'error': str(e)
         },402
 
-    return '', 201
+    response = jsonify()
+    response.status_code = 201
+    response.headers['Location'] = f'/pessoas/{row.id}'
+    return response
 
 @app.route("/pessoas/<uuid:id>",methods=['GET'])
 def GetPessoas(id): ...
