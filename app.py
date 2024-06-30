@@ -4,6 +4,7 @@ from pydantic_core import ValidationError
 from model.pessoa import Pessoa
 from settings import createData, db
 from sqlalchemy.exc import IntegrityError
+from model.UnprocessableError import UnprocessableError
 
 # from model.pessoa import Pessoa
 from model.PessoaModel import PessoaM
@@ -15,18 +16,14 @@ createData(app)
 @app.route("/pessoas",methods=['POST'])
 def PostPessoas():
     try:
-        new_user = Pessoa(**request.json)
-        row = PessoaM(**new_user.model_dump())
+        row = PessoaM(**Pessoa(**request.json).model_dump())
         db.session.add(row)
         db.session.commit()
-    except ValidationError as e:
-        return {
-            'error': str(e)
-        }, 400
-    except IntegrityError as e:
-        return {
-            'error': str(e)
-        },402
+    except ValidationError:
+        return {}, 400
+    
+    except (IntegrityError, UnprocessableError):
+        return {},422
 
     response = jsonify()
     response.status_code = 201
