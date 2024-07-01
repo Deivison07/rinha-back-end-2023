@@ -1,10 +1,12 @@
 from datetime import date
-from pydantic import BaseModel, StringConstraints, field_validator
+from pydantic import BaseModel, StringConstraints, field_validator, ConfigDict
 from typing_extensions import Annotated
 from typing import List, Optional
 from .UnprocessableError import UnprocessableError
 
 class Pessoa(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    
     apelido: Annotated[str, StringConstraints(max_length=32)]
     nome: Annotated[str, StringConstraints(max_length=100)]
     nascimento: date
