@@ -1,13 +1,13 @@
 from flask import Flask, jsonify, request
 from pydantic_core import ValidationError
-from model.pessoa import Pessoa
+from model.pessoaValidation import Pessoa
 from settings import createData, db
 from sqlalchemy.exc import IntegrityError
-from model.UnprocessableError import UnprocessableError
+from model.unprocessableError import UnprocessableError
 from sqlalchemy.sql import text
  
 # from model.pessoa import Pessoa
-from model.PessoaModel import PessoaM
+from model.pessoaModel import PessoaM
 
 app = Flask(__name__)   #instancia Flask app
 

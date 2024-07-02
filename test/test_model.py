@@ -1,5 +1,5 @@
 import unittest
-from model.pessoa import Pessoa
+from model.pessoaValidation import Pessoa
 from pydantic_core import ValidationError
 from model.UnprocessableError import UnprocessableError
 class MainTest(unittest.TestCase):

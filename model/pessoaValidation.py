@@ -2,7 +2,7 @@ from datetime import date
 from pydantic import BaseModel, StringConstraints, field_validator, ConfigDict
 from typing_extensions import Annotated
 from typing import List, Optional
-from .UnprocessableError import UnprocessableError
+from .unprocessableError import UnprocessableError
 
 class Pessoa(BaseModel):
     model_config = ConfigDict(from_attributes=True)
