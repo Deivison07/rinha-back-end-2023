@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 load_dotenv()
 
-pool_size = os.getenv("POOL_SIZE")
+pool_size = int(os.getenv("POOL_SIZE"))
 database_host = os.getenv("DATABASE_IP")
 database_pass = os.getenv("DATABASE_PASS")
 database_port = os.getenv("DATABASE_PORT")
