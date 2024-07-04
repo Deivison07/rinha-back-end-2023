@@ -6,6 +6,22 @@
   - Postgres (banco de dados relacional)
   - Nginx (balanceador de carga)
   - sqlalchemy (ORM para integração com banco de dados)
+### Passos para Instalar
+
+1. **Clone o repositório:**
+    ```bash
+    git clone https://github.com/Deivison07/rinha-back-end-2023.git
+    ```
+## Executando a Aplicação
+
+1. **Navegue até o diretório do projeto:**
+    ```bash
+    cd rinha-back-end-2023
+    ```
+2. **Construa e execute a aplicação usando Docker Compose:**
+    ```bash
+    docker-compose up --build
+    ```
 
 ## fluxo de trabalho
 ```mermaid
